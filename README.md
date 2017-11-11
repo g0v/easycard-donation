@@ -7,6 +7,10 @@ as state in [easycard corporation website](http://www.easycard.com.tw/news/post-
 
 ( 表中所列金額皆含贈卡價值 )
 
+## CSV
+
+converted with [Ronnywang's awesome PDF table extractor](https://ronnywang.github.io/pdf-table-extractor/)
+
 ## LICENSE
 
 * source code: MIT
