@@ -11,6 +11,9 @@ as state in [easycard corporation website](http://www.easycard.com.tw/news/post-
 
 converted with [Ronnywang's awesome PDF table extractor](https://ronnywang.github.io/pdf-table-extractor/)
 
+* [separated csv files](https://github.com/g0v/easycard-donation/tree/master/csv)
+* [merged json file](https://github.com/g0v/easycard-donation/blob/master/all.json)
+
 ## LICENSE
 
 * source code: MIT
