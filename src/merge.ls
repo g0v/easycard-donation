@@ -15,6 +15,9 @@ data = fs.readdir-sync \../csv
         if !it["受贈單位/執行單位"] => it["受贈單位/執行單位"] = last["受贈單位/執行單位"]
         if !it["摘要"] => it["摘要"] = last["摘要"]
         if !it["項次"] => it["項次"] = last["項次"]
+      if it["受贈單位/執行單位"] and typeof(it["受贈單位/執行單位"]) == \string =>
+        it["受贈單位/執行單位"] = it["受贈單位/執行單位"].replace(/[【】]/g,'')
+        it["受贈單位/執行單位"] = it["受贈單位/執行單位"].split(\\n).filter(->it)
       last := it
     d.data
   .map ->
@@ -24,5 +27,13 @@ data = fs.readdir-sync \../csv
       if it["金額"] => it["金額"] = +it["金額"].replace(/,/g,'')
     it
   .filter -> it.length
-data.sort (a,b) -> b.year - a.year
+data = data.reduce(((a,b) -> a ++ b), [])
+data.sort (a,b) -> b["年度"] - a["年度"]
 fs.write-file-sync \../all.json, JSON.stringify(data)
+
+csv = []
+keys = [k for k of data.0]
+csv.push keys.join(\,)
+for item in data =>
+  csv.push keys.map(-> "\"#{item[it]}\"").join(',')
+fs.write-file-sync \../all.csv, csv.join(\\n)
